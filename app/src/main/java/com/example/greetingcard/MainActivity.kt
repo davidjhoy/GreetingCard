@@ -1,8 +1,11 @@
 package com.example.greetingcard
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -10,6 +13,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.greetingcard.ui.theme.GreetingCardTheme
@@ -24,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    BirthdayCardGreeting("Happy Birthday!", "from me")
+                    BirthdayGreetingWithImage("Happy Birthday!", "from me")
                 }
             }
         }
@@ -46,11 +50,24 @@ fun BirthdayCardGreeting(greeting: String, from: String){
 
 }
 
-@Preview(showBackground = true,
+@Composable
+fun BirthdayGreetingWithImage(message: String, from: String){
+    val image = painterResource(R.drawable.bdcard)
+    Box {
+        Image(
+            painter = image,
+            contentDescription = null
+
+        )
+        BirthdayCardGreeting(greeting = message, from = from)
+    }
+}
+
+@Preview(showBackground = false,
          showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     GreetingCardTheme {
-        BirthdayCardGreeting("Preview Happy Birthday", "-from Me")
+        BirthdayGreetingWithImage("Happy Birthday", "-from S")
     }
 }
